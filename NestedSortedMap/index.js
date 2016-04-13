@@ -1,0 +1,1 @@
+window.NestedSortedMap = require('./NestedSortedMap');

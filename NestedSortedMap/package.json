@@ -1,0 +1,14 @@
+{
+  "name": "nestedsortedmap",
+  "version": "1.0.0",
+  "description": "",
+  "main": "NestedSortedMap.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "collections": "^3.0.0"
+  }
+}
