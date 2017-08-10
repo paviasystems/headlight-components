@@ -13,12 +13,14 @@ var testData1 = [
             prop: 'IDRole',
             qualifier: 'EQ',
             value: '4',
-            op: 'OR'
+            op: 'OR',
+            sort: 'ASC'
         }, {
             prop: 'FirstName',
             qualifier: 'LK',
             value: 'one',
-            op: 'OR'
+            op: 'OR',
+            sort: true
         },
         [
             {
@@ -34,7 +36,7 @@ var data = new hlClientFilter(testData1);
 
 describe('hlClientFilter', function() {
     it('should return a string representation of the input data', function() {
-        assert.equal(data.toString(), 'FBV~IDCompany~EQ~1~FOP~0~(~0~FBVOR~IDRole~EQ~4~FBVOR~FirstName~LK~one%25~FOP~0~(~0~FBL~LastName~INN~one,two~FCP~0~)~0~FCP~0~)~0');
+        assert.equal(data.toString(), 'FBV~IDCompany~EQ~1~FOP~0~(~0~FBVOR~IDRole~EQ~4~FBVOR~FirstName~LK~one%25~FOP~0~(~0~FBL~LastName~INN~one,two~FCP~0~)~0~FCP~0~)~0~FSF~IDRole~ASC~0~FSF~FirstName~DESC~0');
     });
     it('should have 8 chunks', function() {
         assert.equal(data.chunks.length, 8);
@@ -52,7 +54,7 @@ describe('hlClientFilter', function() {
         assert.equal(tildeLength > insaneAmount, true);
     });
     describe('as a tree', function() {
-        it('should have 2 nested (FOP) layers', function() {
+        it('should have proper nesting', function() {
             var tempLevels = 0;
             function getLevels(level) {
                 var tempKeys = Object.keys(level);
@@ -65,7 +67,32 @@ describe('hlClientFilter', function() {
             }
             getLevels(data.tree);
 
-            assert.equal(tempLevels, 2);
+            var levels = 0;
+            function countLevels(input) {
+                return input.forEach(function (level) {
+                    if (level.length) {
+                        levels++;
+                        countLevels(level);
+                    }
+                })
+            }
+            countLevels(data._input);
+            assert.equal(tempLevels, levels);
         });
+        it ('should have sort filters', function () {
+            var sorts = [];
+            function hasSorting(input) {
+                return input.forEach(function (level) {
+                    if (level.length) {
+                        hasSorting(level);
+                    }
+                    if (level.hasOwnProperty('sort')) {
+                        sorts.push(level.prop);
+                    }
+                })
+            }
+            hasSorting(data._input);
+            assert.equal(Object.keys(data.tree.FSF).length, sorts.length);
+        })
     });
 });

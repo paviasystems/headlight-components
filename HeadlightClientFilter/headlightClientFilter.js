@@ -1,6 +1,7 @@
 function hlClientFilter (inputValues) {
     this._input = inputValues;
     this.chunks = [];
+    this.sortChunks = [];
     this.tree = {};
     this.map = function (value, FOP) {
         var me = this;
@@ -31,6 +32,20 @@ function hlClientFilter (inputValues) {
                     a.value += encodeURIComponent('%');
                     // if FBL/INN can use wildcards handle that here too
                 }
+                // handle sorts
+                if (a.sort) {
+                    if (a.sort !== 'ASC' && a.sort !== 'DESC') {
+                        // default sorting desc;
+                        a.sort = 'DESC';
+                    }
+                    var tempSortString = ['FSF', a.prop, a.sort, '0'].join('~');
+                    me.sortChunks.push(tempSortString);
+                    // sort goes at root of tree
+                    if (!me.tree.FSF) {
+                        me.tree.FSF = {};
+                    }
+                    me.tree.FSF[a.prop] = a.sort;
+                }
                 var filter = [filterType, a.prop, a.qualifier, (a.value || a.values.join(','))];
                 if (!FOP[filterType]) {
                     FOP[filterType] = {};
@@ -51,7 +66,8 @@ function hlClientFilter (inputValues) {
 
 hlClientFilter.prototype.toString = function () {
     if (this.chunks.length) {
-        return this.chunks.join('~');
+        // merge chunks with sortChunks
+        return this.chunks.concat(this.sortChunks).join('~');
     } else if (!this._input){
         throw new Error('no input');
     }
