@@ -2,9 +2,9 @@
 Public shared components
 
 
-## headlightClientFilter
+## headlightClientFilter (Matilde)
 
-A small library to transform JSON input to ~FBV~ syntax.
+A small library to transform JSON input to \~FBV\~ syntax.
 
 From this:
 
@@ -22,8 +22,7 @@ To this!!
     [ // nesting
         {...},
         {...},
-        [
-            // even more nesting
+        [ // even more nesting
             {...}
         ]
     ]
@@ -37,7 +36,7 @@ To this!!
 | prop      | String           | Yes      | The property to query or sort on                                                     |
 | qualifier | String           | Yes      | A value from the list of qualifiers                                                  |
 | value     | String           | Yes      | Value to query with                                                                  |
-| op        | String           | No       | Query using `OR`. defaults to `AND`                                                  |
+| op        | String           | No       | Query using `OR`. Defaults to `AND`                                                  |
 | sort      | String, Boolean | No       | Sort on property `ASC` or `DESC`. Defaults to `DESC` if property is boolean and true  |
 
 ### Usage
