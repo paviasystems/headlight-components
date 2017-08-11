@@ -35,7 +35,7 @@ var data = new hlClientFilter(testData1);
 
 describe('hlClientFilter', function() {
     it('should return a string representation of the input data', function() {
-        assert.equal(data.toString(), 'FBV~IDCompany~EQ~1~FOP~0~(~0~FBVOR~IDRole~EQ~4~FBVOR~FirstName~LK~one%25~FOP~0~(~0~FBL~LastName~INN~one,two~FCP~0~)~0~FCP~0~)~0~FSF~IDRole~ASC~0~FSF~FirstName~DESC~0');
+        assert.equal(data.toString(), 'FBV~ID~EQ~1~FOP~0~(~0~FBVOR~Role~LE~4~FBVOR~FirstName~LK~Cesar%25~FOP~0~(~0~FBL~LastName~INN~Chavez,Vargas~FCP~0~)~0~FCP~0~)~0~FSF~FirstName~DESC~0');
     });
     it('should have 8 chunks', function() {
         assert.equal(data.chunks.length, 8);
