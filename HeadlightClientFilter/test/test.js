@@ -4,21 +4,20 @@ const assert = chai.assert;;
 
 var testData1 = [
     {
-        prop: 'IDCompany',
+        prop: 'ID',
         qualifier: 'EQ',
         value: '1'
     },
     [
         {
-            prop: 'IDRole',
-            qualifier: 'EQ',
+            prop: 'Role',
+            qualifier: 'LE',
             value: '4',
-            op: 'OR',
-            sort: 'ASC'
+            op: 'OR'
         }, {
             prop: 'FirstName',
             qualifier: 'LK',
-            value: 'one',
+            value: 'Cesar',
             op: 'OR',
             sort: true
         },
@@ -26,7 +25,7 @@ var testData1 = [
             {
                 prop: 'LastName',
                 qualifier: 'INN',
-                values: ['one', 'two']
+                values: ['Chavez', 'Vargas']
             }
         ]
     ]
