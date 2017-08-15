@@ -5,53 +5,56 @@ function hlClientFilter (inputValues) {
     this.tree = {};
     this.map = function (value, FOP) {
         var me = this;
-        return Array.prototype.map.call(value, function (a, index, ogvalues) {
+        return Array.prototype.map.call(value, function (item) {
             // Nesting
-            if (typeof a === 'object' && a.length) {
+            if (typeof item === 'object' && item.length) {
 
                 if (!FOP.FOP) {
                     FOP.FOP = {};
                 }
                 me.chunks.push('FOP~0~(~0');
-                me.map(a, FOP.FOP);
+                me.map(item, FOP.FOP);
                 me.chunks.push('FCP~0~)~0');
-            } else {
+            } else if (item) {
 
                 var filterType;
 
-                if (a.values && a.values.length) {
+                if (item.values && item.values.length) {
                     filterType = 'FBL';
+                    // overwrite qualifier if using values instead of value (split on ,)
+                    item.qualifier = 'INN';
                 } else {
                     filterType = 'FBV'
+                    // Handle wildcards for LK qualifier
+                    if (item.qualifier === 'LK') {
+                        item.value += encodeURIComponent('%');
+                        // if FBL/INN can use wildcards handle that here too
+                    }
                 }
-                if (a.op && a.op.toLowerCase() === 'or') {
+                if (item.op && item.op.toLowerCase() === 'or') {
                     filterType += 'OR';
                 }
-                // Handle wildcards for LK qualifier
-                if (a.qualifier === 'LK') {
-                    a.value += encodeURIComponent('%');
-                    // if FBL/INN can use wildcards handle that here too
-                }
+
                 // handle sorts
-                if (a.sort) {
-                    if (a.sort !== 'ASC' && a.sort !== 'DESC') {
+                if (item.sort) {
+                    if (item.sort !== 'ASC' && item.sort !== 'DESC') {
                         // default sorting desc;
-                        a.sort = 'DESC';
+                        item.sort = 'DESC';
                     }
-                    var tempSortString = ['FSF', a.prop, a.sort, '0'].join('~');
+                    var tempSortString = ['FSF', item.prop, item.sort, '0'].join('~');
                     me.sortChunks.push(tempSortString);
                     // sort goes at root of tree
                     if (!me.tree.FSF) {
                         me.tree.FSF = {};
                     }
-                    me.tree.FSF[a.prop] = a.sort;
+                    me.tree.FSF[item.prop] = item.sort;
                 }
-                var filter = [filterType, a.prop, a.qualifier, (a.value || a.values.join(','))];
+                var filter = [filterType, item.prop, item.qualifier, (item.value || item.values.join(','))];
                 if (!FOP[filterType]) {
                     FOP[filterType] = {};
                 }
 
-                FOP[filterType][a.prop] = [a.qualifier, (a.value || a.values.join(','))].join('~');
+                FOP[filterType][item.prop] = [item.qualifier, (item.value || item.values.join(','))].join('~');
 
                 me.chunks.push(filter.join('~'));
             }
