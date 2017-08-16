@@ -7,3 +7,6 @@ git commit -m "Publish bower $VERSION"
 git tag "$VERSION"
 
 git push origin --tags
+
+#npm publish ./HeadlightClientFilter
+#npm publish ./NestedSortedMap
