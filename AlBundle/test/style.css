@@ -1,0 +1,17 @@
+.results-td {
+    vertical-align: top;
+}
+
+.hidden {
+    display: none;
+}
+
+.loading-message {
+    display: none;
+}
+.loading button[type="submit"] {
+    display: none;
+}
+.loading .loading-message {
+    display: block;
+}

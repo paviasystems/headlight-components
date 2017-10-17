@@ -1,0 +1,21 @@
+{
+  "name": "hl-bundle-test",
+  "version": "1.0.0",
+  "description": "Tool to test bundle connections",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Cesar Vargas",
+  "license": "ISC",
+  "dependencies": {
+    "jquery": "^3.2.1",
+    "lodash": "^4.17.4"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.18.13",
+    "gulp": "^3.9.1",
+    "http-proxy-middleware": "^0.17.4",
+    "yargs": "^9.0.1"
+  }
+}

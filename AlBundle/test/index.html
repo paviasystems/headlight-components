@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.16.2/lodash.js"></script>
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"
+      integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+      crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css" />
+    <script src="../AlBundle.js"></script>
+  </head>
+
+  <body>
+    <h4>Bundle Tester</h4>
+    <div class="tool hidden" id="tool">
+        <h6 class="project-name"></h6>
+        <div>
+          <input type="text" placeholder="Contractor" class="org-value" />
+          <input type="text" placeholder="BidItem" class="bi-value" />
+          <input type="text" placeholder="LineItem" class="li-value" />
+          <button class="do-it">Go</button>
+        </div>
+        <button class="random-org">Random Org</button>
+        <button class="random-bi">Random BidItem</button>
+        <button class="random-li">Random Line Item</button>
+        <button class="reset button-primary">Reset</button>
+        <div class="results">
+          <h4 class="target"></h4>
+          <table>
+            <thead>
+              <tr>
+                <th style="width: 33%">Orgs</th>
+                <th style="width: 33%">BidItems</th>
+                <th style="width: 33%">LineItems</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="results-org results-td" data-type="org"></td>
+                <td class="results-bi results-td" data-type="bi"></td>
+                <td class="results-li results-td" data-type="li"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+    </div>
+    <div class="login" id="login">
+        <form name="login">
+            <label for="environment">Environment
+            <select class="" name="environment">
+                <option value="qa">QA</option>
+                <option value="stg">STG</option>
+                <option value="uat">UAT</option>
+            </select>
+            <label for="username">Username
+            <input name="username" type="text"></label>
+            <label for="password">Password
+            <input name="password" type="password"></label>
+            <button type="submit">login</button>
+        </form>
+    </div>
+    <div class="project-setup hidden" id="setup">
+        <form name="setup">
+            <input type="text" name="projectId" class="project-id" placeholder="Project ID">
+            <button class="get-bundle button-primary" type="submit">Do it!</button>
+        </form>
+        <div class="loading-message">
+            <h4>loading bundle please wait.</h4>
+        </div>
+    </div>
+    <script src="app.js"></script>
+  </body>
+
+</html>

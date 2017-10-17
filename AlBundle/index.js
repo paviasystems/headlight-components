@@ -1,0 +1,1 @@
+window.AlBundle = require('./AlBundle');
