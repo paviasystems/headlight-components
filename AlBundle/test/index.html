@@ -12,27 +12,34 @@
   </head>
 
   <body>
-    <h4>Bundle Tester</h4>
+
     <div class="tool hidden" id="tool">
-        <h6 class="project-name"></h6>
+        <h4>Bundle Tester <a class="logout u-pull-right">logout</a></h4>
+        <h6><span class="project-name"></span> <a class="change-project">change project</a></h6>
+        <div class="gritty">
+
+        </div>
         <div>
           <input type="text" placeholder="Contractor" class="org-value" />
           <input type="text" placeholder="BidItem" class="bi-value" />
           <input type="text" placeholder="LineItem" class="li-value" />
+          <input type="text" placeholder="Equipment" class="eq-value" />
           <button class="do-it">Go</button>
         </div>
         <button class="random-org">Random Org</button>
         <button class="random-bi">Random BidItem</button>
         <button class="random-li">Random Line Item</button>
+        <button class="random-eq">Random Equipment</button>
         <button class="reset button-primary">Reset</button>
         <div class="results">
           <h4 class="target"></h4>
-          <table>
+          <table class="u-full-width">
             <thead>
               <tr>
-                <th style="width: 33%">Orgs</th>
-                <th style="width: 33%">BidItems</th>
-                <th style="width: 33%">LineItems</th>
+                <th style="width: 25%">Orgs</th>
+                <th style="width: 25%">BidItems</th>
+                <th style="width: 25%">LineItems</th>
+                <th style="width: 25%">Equipment</th>
               </tr>
             </thead>
             <tbody>
@@ -40,19 +47,15 @@
                 <td class="results-org results-td" data-type="org"></td>
                 <td class="results-bi results-td" data-type="bi"></td>
                 <td class="results-li results-td" data-type="li"></td>
+                <td class="results-eq results-td" data-type="eq"></td>
               </tr>
             </tbody>
           </table>
         </div>
     </div>
     <div class="login" id="login">
+        <h4>Bundle Tester</h4>
         <form name="login">
-            <label for="environment">Environment
-            <select class="" name="environment">
-                <option value="qa">QA</option>
-                <option value="stg">STG</option>
-                <option value="uat">UAT</option>
-            </select>
             <label for="username">Username
             <input name="username" type="text"></label>
             <label for="password">Password
@@ -61,10 +64,21 @@
         </form>
     </div>
     <div class="project-setup hidden" id="setup">
+        <h4>Bundle Tester <a class="logout u-pull-right">logout</a></h4>
         <form name="setup">
             <input type="text" name="projectId" class="project-id" placeholder="Project ID">
             <button class="get-bundle button-primary" type="submit">Do it!</button>
         </form>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Project ID</th>
+                    <th>Project Name</th>
+                </tr>
+            </thead>
+            <tbody class="project-results">
+            </tbody>
+        </table>
         <div class="loading-message">
             <h4>loading bundle please wait.</h4>
         </div>
